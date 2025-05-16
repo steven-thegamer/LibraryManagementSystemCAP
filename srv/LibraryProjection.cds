@@ -1,6 +1,6 @@
-using my.library.AvailableBooks from '../db/library';
-using my.library.Users from '../db/users';
-using my.library.Books from '../db/books';
+// This file defines a projection for the library system, which includes all books and registered users.
+// This is only to be accessible for administrators.
+using { my.library.Books, my.library.Users } from '../db/index.cds';
 
 service LibraryProjection
 {

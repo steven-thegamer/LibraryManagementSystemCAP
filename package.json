@@ -14,6 +14,13 @@
         "password": "admin",
         "roles": ["admin"]
       }
+    },
+    "db": {
+      "kind": "sqlite",
+      "credentials": {
+        "url": "./db/library-data.sqlite",
+        "schema_evolution" : "auto"
+      }
     }
   }
   }

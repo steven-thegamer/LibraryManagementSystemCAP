@@ -2,18 +2,12 @@ namespace my.library;
 
 using { managed } from '@sap/cds/common';
 using { my.library.BookTransactions } from './library';
-
-type Gender : String(1) enum {
-    male = 'm';
-    female = 'f';
-    nonbinary = 'n';
-    other = 'o';
-}
+using { my.dictionary } from '../dictionary/elements';
 
 entity Users : managed {
-  key ID: Integer;
-  name: String(100);
-  gender : Gender;
-  email: String(100);
+  key ID: dictionary.ID;
+  name: dictionary.person_name;
+  gender : dictionary.gender;
+  email: dictionary.email;
   books: Association to many BookTransactions on books.ID = $self.ID;
 }
