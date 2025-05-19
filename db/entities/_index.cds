@@ -1,3 +1,9 @@
 using from './books';
-using from './library';
+using from './booktransactions';
 using from './users';
+using from './authors';
+using from './categories';
+using from './publishers';
+using from './books2authors';
+using from './books2categories';
+using from './books2publishers';

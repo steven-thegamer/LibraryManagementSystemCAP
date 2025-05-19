@@ -1,7 +1,7 @@
 namespace my.library;
 
 using { managed } from '@sap/cds/common';
-using { my.library.BookTransactions } from './library';
+using { my.library.BookTransactions } from './_index';
 using { my.dictionary } from '../dictionary/elements';
 
 entity Users : managed {
