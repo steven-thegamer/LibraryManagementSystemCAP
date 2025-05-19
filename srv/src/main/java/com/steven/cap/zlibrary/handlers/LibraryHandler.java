@@ -25,17 +25,16 @@ import cds.gen.libraryservice.*;
 public class LibraryHandler implements EventHandler {
 
     private final PersistenceService db;
-    private final CdsModel model;
+    private final CqnAnalyzer analyzer;
 
     public LibraryHandler(PersistenceService db, CdsModel model) {
         this.db = db;
-        this.model = model;
+        this.analyzer = CqnAnalyzer.create(model);
     }
 
     @On(entity = Books_.CDS_NAME)
     public void onInsertBooks(Insert insert) {
         CqnInsert cqnInsert = (CqnInsert) insert;
-        CqnAnalyzer analyzer = new CqnAnalyzer(model);
         AnalysisResult analysisResult = analyzer.analyze(cqnInsert);
         Result result = db.run(cqnInsert);
         Map<String, Object> insertedData = result.first().asMap();

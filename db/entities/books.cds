@@ -12,3 +12,4 @@ entity Books : managed {
   book_category : Association to Books2Categories on book_category.book = $self;
   currentPossessor : Association to Users;
 }
+
