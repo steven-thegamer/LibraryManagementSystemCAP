@@ -1,8 +1,8 @@
-ID;name;gender
-1;JK Rowling;f
-2;William Shakespear;m
-3;Agatha Christie;f
-4;Barbara Cartland;f
-5;Ernest Hemingway;m
-6;Stephen King;m
-7;Veronica Roth;f
+name;gender
+J.K. Rowling;f
+William Shakespear;m
+Agatha Christie;f
+Barbara Cartland;f
+Ernest Hemingway;m
+Stephen King;m
+Veronica Roth;f

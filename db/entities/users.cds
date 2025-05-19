@@ -1,13 +1,12 @@
 namespace my.library;
 
-using { managed } from '@sap/cds/common';
+using { cuid, managed } from '@sap/cds/common';
 using { my.library.BookTransactions } from './_index';
 using { my.dictionary } from '../dictionary/elements';
 
-entity Users : managed {
-  key ID: dictionary.ID;
+entity Users : cuid, managed {
   name: dictionary.person_name;
   gender : dictionary.gender;
   email: dictionary.email;
-  books: Association to many BookTransactions on books.ID = $self.ID;
+  books_history: Association to many BookTransactions on books_history.user = $self;
 }
