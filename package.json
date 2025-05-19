@@ -5,23 +5,16 @@
   "license": "ISC",
   "repository": "<Add your repository here>",
   "devDependencies": {
+    "@cap-js/sqlite": "^1.11.0",
     "@sap/cds-dk": "^8.9.3"
   },
-  "cds":{
-    "requires": {"auth":"basic",
-    "users": {
-      "admin": {
-        "password": "admin",
-        "roles": ["admin"]
-      }
-    },
+  "cds": {
     "db": {
       "kind": "sqlite",
       "credentials": {
         "url": "./db/library-data.sqlite",
-        "schema_evolution" : "auto"
+        "schema_evolution": "auto"
       }
     }
-  }
   }
 }

@@ -10,3 +10,5 @@ type category_name : String(100) @title;
 type publisher_name : String(100) @title;
 type email : String(100) @title;
 type ID : Integer @title;
+type borrowDate : DateTime @title;
+type returnDate : DateTime @title;
