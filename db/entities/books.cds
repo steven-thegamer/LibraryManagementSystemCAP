@@ -1,11 +1,15 @@
 namespace my.library;
 
-using { managed } from '@sap/cds/common';
+using { cuid, managed } from '@sap/cds/common';
 using { my.dictionary } from '.././dictionary/elements';
 using { my.library.Books2Categories, my.library.Books2Authors, my.library.Books2Publishers, my.library.Users } from './_index';
 
-entity Books : managed {
-  key title: dictionary.title;
+@assert.unique: {
+  title : [ title ]
+}
+
+entity Books : cuid, managed {
+  title: dictionary.title;
   desc : dictionary.descr;
   book_author: Association to many Books2Publishers on book_author.book = $self;
   book_publisher : Association to Books2Authors on book_publisher.book = $self;

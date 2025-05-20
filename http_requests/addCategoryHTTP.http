@@ -1,0 +1,7 @@
+POST http://localhost:8080/odata/v4/libraryService/addCategory
+Content-Type: application/json
+
+{
+  "category_name": "New Category",
+  "category_description": "This is a new category for books."
+}

@@ -1,0 +1,13 @@
+{
+    "defaultRenderer": "fiori2",
+    "applications": {
+        "library-books": {
+            "title": "Library",
+            "description": "Manage library books",
+            "additionalInformation": "SAPUI5.Component=admin",
+            "applicationType": "URL",
+            "url": "/admin/webapp",
+            "navigationMode": "embedded"
+        }
+    }
+}

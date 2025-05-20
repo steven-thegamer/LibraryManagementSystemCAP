@@ -1,9 +1,13 @@
 using { my.library } from '../db/index.cds';
 
 service libraryService {
-  entity Books as projection on library.Books;
-  entity Authors as projection on library.Authors;
-  entity Publishers as projection on library.Publishers;
-  entity Categories as projection on library.Categories;
+  entity LibraryBooks as projection on library.Books
+  excluding { createdBy, modifiedBy, createdAt, modifiedAt };
+  entity LibraryAuthors as projection on library.Authors
+  excluding { createdBy, modifiedBy, createdAt, modifiedAt };
+  entity LibraryPublishers as projection on library.Publishers
+  excluding { createdBy, modifiedBy, createdAt, modifiedAt };
+  entity LibraryCategories as projection on library.Categories
+  excluding { createdBy, modifiedBy, createdAt, modifiedAt };
+  action addCategory(category_name: String, category_description: String) returns LibraryCategories;
 }
-
