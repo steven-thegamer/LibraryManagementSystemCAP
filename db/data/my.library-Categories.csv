@@ -1,7 +1,8 @@
-name
-Fantasy
-Horror
-Science Fiction
-Mystery
-Romance
-Thriller
+name;descr
+Fantasy;A genre of fiction that concentrates on imaginary elements.
+Horror;A genre of fiction that is intended to frighten, scare, or disgust.
+Science Fiction;A genre of speculative fiction that typically deals with imaginative and futuristic concepts.
+Mystery;A genre of fiction that involves a mysterious death or crime to be solved.
+Romance;A genre of fiction that focuses on romantic relationships between characters.
+Thriller;A genre of fiction that is characterized by excitement, suspense, and tension.
+Biography;A genre of literature that tells the story of a person's life.

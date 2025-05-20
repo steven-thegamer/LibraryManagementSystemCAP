@@ -1,7 +1,10 @@
 package com.steven.cap.zlibrary.handlers;
 
+import java.util.HashMap;
+import java.util.Locale.Category;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.sap.cds.Result;
@@ -11,6 +14,8 @@ import com.sap.cds.ql.cqn.CqnAnalyzer;
 import com.sap.cds.ql.cqn.CqnInsert;
 import com.sap.cds.ql.cqn.CqnSelect;
 import com.sap.cds.reflect.CdsModel;
+import com.sap.cds.services.cds.ApplicationService;
+import com.sap.cds.services.cds.CqnService;
 import com.sap.cds.services.handler.EventHandler;
 import com.sap.cds.services.handler.annotations.On;
 import com.sap.cds.services.handler.annotations.ServiceName;
@@ -23,29 +28,36 @@ import cds.gen.libraryservice.*;
 @Component
 @ServiceName(LibraryService_.CDS_NAME)
 public class LibraryHandler implements EventHandler {
-
-    private final PersistenceService db;
+    
     private final CqnAnalyzer analyzer;
+    private final PersistenceService db;
 
-    public LibraryHandler(PersistenceService db, CdsModel model) {
+    @Qualifier("LibraryService")
+    private ApplicationService libraryService;
+
+    // @Autowired
+    // private AdminService adminService;
+
+    LibraryHandler(PersistenceService db, CdsModel model) {
         this.db = db;
         this.analyzer = CqnAnalyzer.create(model);
     }
 
-    @On(entity = Books_.CDS_NAME)
-    public void onInsertBooks(Insert insert) {
-        CqnInsert cqnInsert = (CqnInsert) insert;
-        AnalysisResult analysisResult = analyzer.analyze(cqnInsert);
-        Result result = db.run(cqnInsert);
-        Map<String, Object> insertedData = result.first().asMap();
-        System.out.println("Inserted Data: " + insertedData);
-        System.out.println("Analysis Result: " + analysisResult);
+    @On(event = AddCategoryContext.CDS_NAME)
+    public void onAddCategory(AddCategoryContext context) {
+        System.out.println("Adding new category...");
+
+        // Create the new category
+        LibraryCategories newCategory = LibraryCategories.create();
+        newCategory.setName(context.getCategoryName());
+        newCategory.setDescr(context.getCategoryDescription());
+
+        // Send the new category to the database
+        CqnInsert insert = Insert.into(LibraryCategories_.CDS_NAME).entry(newCategory);
+        Result result = db.run(insert);
+        LibraryCategories insertCategory = result.single(LibraryCategories.class);
+
+        context.setResult(insertCategory);
     }
 
-    @On(entity = Authors_.CDS_NAME)
-    public void onSelectAuthors(CqnSelect select) {
-        Result result = db.run(select);
-        System.out.println("Selected Authors: " + result.list());
-    }
-    
 }
