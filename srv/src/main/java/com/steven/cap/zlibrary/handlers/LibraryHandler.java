@@ -60,4 +60,23 @@ public class LibraryHandler implements EventHandler {
         context.setResult(insertCategory);
     }
 
+    @On(event = { CqnService.EVENT_CREATE, CqnService.EVENT_UPDATE }, entity = LibraryCategories_.CDS_NAME)
+    public void onCreateOrUpdateCategory(LibraryCategories category) {
+        System.out.println("Creating or updating category...");
+        /*
+        // Create the new category
+        LibraryCategories newCategory = LibraryCategories.create();
+        newCategory.setName(context.getCategoryName());
+        newCategory.setDescr(context.getCategoryDescription());
+
+        // Send the new category to the database
+        CqnInsert insert = Insert.into(LibraryCategories_.CDS_NAME).entry(category);
+        Result result = db.run(insert);
+        LibraryCategories insertCategory = result.single(LibraryCategories.class);
+
+        // Send the new category to the database
+        context.setResult(insertCategory);
+    */
+    }
+
 }

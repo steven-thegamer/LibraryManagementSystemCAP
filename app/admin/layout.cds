@@ -21,6 +21,15 @@ annotate categoryService.LibraryCategories with @(
         },
         /*
         {
+            $Type             : 'UI.DataFieldForAction',
+            Action            : 'categoryService.addCategory',
+            Label             : '{i18n>addCategory}',
+            Inline            : false,
+            InvocationGrouping: #Isolated,
+            @UI.Importance    : #High,
+        },
+        
+        {
             $Type         : 'UI.DataField',
             Value         : book_author,
             @UI.Importance: #Medium,
@@ -45,5 +54,26 @@ annotate categoryService.LibraryCategories with @(
         },
         */
     ],
+    UI.Facets                    : [
+        {
+            $Type : 'UI.ReferenceFacet',
+            Label : '{i18n>Header}',
+            ID    : 'Header',
+            Target: '@UI.FieldGroup#Header'
+        }
+    ],
+    UI.FieldGroup #Header    : {
+        $Type: 'UI.FieldGroupType',
+        Data : [
+            {
+                $Type: 'UI.DataField',
+                Value: name
+            },
+            {
+                $Type: 'UI.DataField',
+                Value: descr
+            }
+        ]
+    },
 
 );
