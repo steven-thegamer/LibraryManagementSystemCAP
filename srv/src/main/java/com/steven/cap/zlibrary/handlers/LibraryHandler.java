@@ -22,18 +22,18 @@ import com.sap.cds.services.handler.annotations.ServiceName;
 import com.sap.cds.services.persistence.PersistenceService;
 
 import cds.gen.my.library.*;
-import cds.gen.libraryservice.*;
+import cds.gen.categoryservice.*;
 
 
 @Component
-@ServiceName(LibraryService_.CDS_NAME)
+@ServiceName(CategoryService_.CDS_NAME)
 public class LibraryHandler implements EventHandler {
     
     private final CqnAnalyzer analyzer;
     private final PersistenceService db;
 
-    @Qualifier("LibraryService")
-    private ApplicationService libraryService;
+    @Qualifier("CategoryService")
+    private ApplicationService CategoryService;
 
     // @Autowired
     // private AdminService adminService;
@@ -43,8 +43,8 @@ public class LibraryHandler implements EventHandler {
         this.analyzer = CqnAnalyzer.create(model);
     }
 
-    @On(event = AddCategoryContext.CDS_NAME)
-    public void onAddCategory(AddCategoryContext context) {
+    @On(event = LibraryCategoriesAddCategoryContext.CDS_NAME)
+    public void onAddCategory(LibraryCategoriesAddCategoryContext context) {
         System.out.println("Adding new category...");
 
         // Create the new category

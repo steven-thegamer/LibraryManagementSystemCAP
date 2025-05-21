@@ -11,8 +11,8 @@
         "description": "{{appDescription}}",
         "resources": "resources.json",
         "dataSources": {
-            "LibraryService": {
-                "uri": "/api/books/",
+            "LibraryCategories": {
+                "uri": "/odata/v4/categoryService/",
                 "type": "OData",
                 "settings": {
                     "odataVersion": "4.0"
@@ -39,7 +39,7 @@
                 }
             },
             "": {
-                "dataSource": "libraryService",
+                "dataSource": "LibraryCategories",
                 "preload": true,
                 "settings": {
                     "synchronizationMode": "None",
@@ -62,18 +62,18 @@
             "routes": [
                 {
                     "pattern": ":?query:",
-                    "name": "LibraryService",
-                    "target": "LibraryService"
+                    "name": "LibraryCategories",
+                    "target": "LibraryCategories"
                 }
             ],
             "targets": {
-                "LibraryService": {
+                "LibraryCategories": {
                     "type": "Component",
-                    "id": "LibraryService",
+                    "id": "LibraryCategories",
                     "name": "sap.fe.templates.ListReport",
                     "options": {
                         "settings": {
-                            "entitySet": "LibraryBooks",
+                            "entitySet": "LibraryCategories",
                             "navigation": {}
                         }
                     }
