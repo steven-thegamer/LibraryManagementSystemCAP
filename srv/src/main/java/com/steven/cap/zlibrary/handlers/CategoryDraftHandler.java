@@ -66,11 +66,13 @@ public class CategoryDraftHandler implements EventHandler {
 */
     @Before(event = DraftService.EVENT_DRAFT_SAVE)
     public void saveDraft(DraftSaveEventContext context) {
+        System.out.println("saveDraft1");
         LibraryCategories category = getCategoryDraft(getCategoryId(context), false);
-        System.out.println("saveDraft" + category.toJson());
+        System.out.println("saveDraft2" + category.toJson());
         updateCategoryDraft(category, false, LibraryCategories.DESCR, "saveDraft" + category.getDescr());
     }
 
+    // This works
     @Before(event = DraftService.EVENT_DRAFT_CANCEL)
     public void deleteDraft(DraftCancelEventContext context) {
         System.out.println("deleteDraft" + getCategoryDraft(getCategoryId(context), false).toJson());
@@ -85,6 +87,7 @@ public class CategoryDraftHandler implements EventHandler {
         }
     }
 
+    // This works
     @Before(event = DraftService.EVENT_DRAFT_READ)
     public void readDraft(DraftReadEventContext context) {
         System.out.println("readDraft");
@@ -107,23 +110,17 @@ public class CategoryDraftHandler implements EventHandler {
         return (String) CqnAnalyzer.create(model).analyze(context.getCqn()).targetKeys().get(LibraryCategories.ID);
     }
 
-    private LibraryCategories getCategoryDraft(String categoryName, Boolean isActiveEntity) {
-        return categoryDraft.run(Select.from(LIBRARY_CATEGORIES).where(o -> o.getName().eq(categoryName).and(o.IsActiveEntity().eq(isActiveEntity)))).first(LibraryCategories.class).orElseThrow(notFound(Messages.CATEGORY_MISSING));
+    private LibraryCategories getCategoryDraft(String categoryId, Boolean isActiveEntity) {
+        return categoryDraft.run(Select.from(LIBRARY_CATEGORIES).where(o -> o.ID().eq(categoryId).and(o.IsActiveEntity().eq(isActiveEntity)))).first(LibraryCategories.class).orElseThrow(notFound(Messages.CATEGORY_MISSING));
     }
 
     private LibraryCategories updateCategoryDraft(LibraryCategories category, Boolean isActiveEntity, String column, Object value) {
-        categoryDraft.patchDraft(Update.entity(LIBRARY_CATEGORIES).where(o -> o.getId().eq(category.getId()).and(o.IsActiveEntity().eq(isActiveEntity))).data(column, value));
+        categoryDraft.patchDraft(Update.entity(LIBRARY_CATEGORIES).where(o -> o.ID().eq(category.getId()).and(o.IsActiveEntity().eq(isActiveEntity))).data(column, value));
         return category;
     }
 
     private Supplier<ServiceException> notFound(String message) {
         return () -> new ServiceException(ErrorStatuses.NOT_FOUND, message);
     }
-
-    public CategoryDraftHandler() {
-        // Default constructor
-    }
-
-    // Add your methods here
 
 }
