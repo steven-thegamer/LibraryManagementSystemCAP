@@ -1,7 +1,7 @@
 {
-    "name": "library-books",
+    "name": "library-categories",
     "version": "0.0.1",
-    "description": "Manage library books",
+    "description": "Manage library categories",
     "keywords": [
         "ui5",
         "openui5",

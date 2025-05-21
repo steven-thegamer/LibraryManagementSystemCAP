@@ -1,21 +1,21 @@
 using from '../../srv/books-service';
 
-annotate libraryService.LibraryBooks with @(
+annotate categoryService.LibraryCategories with @(
     UI.HeaderInfo: {
         TypeName      : '{i18n>HeaderTitle}',
         TypeNamePlural: '{i18n>BookInfo}',
     },
     UI.SelectionFields     : [
-        title,
+        name,
     ],
     UI.LineItem  : [
         {
-            Value             : title,
+            Value             : name,
             @UI.Importance    : #High,
             @HTML5.CssDefaults: {width: '10em'}
         },
         {
-            Value             : desc,
+            Value             : descr,
             @UI.Importance    : #High,
             @HTML5.CssDefaults: {width: '50em'}
         },
